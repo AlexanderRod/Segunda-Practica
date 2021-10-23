@@ -6,7 +6,10 @@
         <div class="row justify-content-center">
             <div class="col-lg-12 align-self-center">
                 <ul class="category-menu">
-                    <li class="category-wrap"><a href="shop.html"><img src="assets/img/category/1.png" alt="category">Ramen</a>
+                    <li class="category-wrap">
+                        {% for cat in category_list %}
+                        <a href="{% url 'web:categoria' cat.id %}"><img src="{{ cat.imagen.url }}" alt="category">{{cat.nombre}}</a>
+                        {% endfor %}
                     </li>
                 </ul>
             </div>
@@ -17,19 +20,19 @@
 
 <!-- populer Area Start-->
 <section class="populer-area pd-top-50 pd-bottom-120">
+    {% for prod in product_list %}
     <div class="container">
         <div class="row justify-content-center">
-
             <div class="col-lg-4 col-md-6">
                 <div class="single-item-wrap">
                     <div class="thumb">
-                        <img src="assets/img/product/pizza/3.png" alt="img">
+                        <img src="{{ prod.imagen.url }}" alt="img">
                         <a class="fav-btn" href="#"><i class="ri-heart-line"></i></a>
                     </div>
                     <div class="wrap-details">
-                        <h5><a href="single-product.html">Roasted Garlic Chicken Pizza </a></h5>
+                        <h5><a href="{% url 'web:producto' prod.id %}">{{ prod.nombre }}</a></h5>
                         <div class="wrap-footer">
-                            <h6 class="price">$27.00</h6>
+                            <h6 class="price">S/ {{ prod.precio }}</h6>
                         </div>                            
                     </div>
                     <div class="btn-area">
@@ -39,5 +42,6 @@
             </div>
         </div>
     </div>
+    {% endfor %}
 </section>
 {% endblock %}
